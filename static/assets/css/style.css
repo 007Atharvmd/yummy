@@ -1,0 +1,125 @@
+/* General Reset */
+body {
+    font-family: "Open Sans", sans-serif;
+    color: #444;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 0;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  h1, h2, h3, h4, h5 {
+    font-family: "Amatic SC", cursive;
+  }
+  
+  /* Navbar */
+  .navbar {
+    background-color: #fff;
+    padding: 15px 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .navbar-brand {
+    font-weight: 700;
+    font-size: 30px;
+    color: #000;
+  }
+  
+  .navbar-brand span {
+    color: #ce1212;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #555;
+    font-weight: 500;
+    margin: 0 15px;
+  }
+  
+  .navbar-nav .nav-link.active {
+    color: #ce1212;
+    border-bottom: 2px solid #ce1212;
+  }
+  
+  /* Hero Section */
+  .hero {
+    background-color: #eee;
+    padding: 80px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .hero-text {
+    max-width: 50%;
+  }
+  
+  .hero-text h2 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+  
+  .hero-text p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #666;
+  }
+  
+  .hero-img img {
+    max-width: 100%;
+    border-radius: 12px;
+  }
+  
+  /* Buttons */
+  .btn-main {
+    background-color: #ce1212;
+    color: #fff;
+    border-radius: 30px;
+    padding: 12px 28px;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(206, 18, 18, 0.3);
+    transition: 0.3s ease-in-out;
+  }
+  
+  .btn-main:hover {
+    background-color: #a60e0e;
+  }
+  
+  /* Watch Video Button */
+  .btn-secondary {
+    margin-left: 20px;
+    color: #000;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+  }
+  
+  .btn-secondary i {
+    margin-right: 8px;
+    font-size: 18px;
+    color: #ce1212;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .hero-text,
+    .hero-img {
+      max-width: 100%;
+    }
+  
+    .btn-secondary {
+      margin-left: 0;
+      margin-top: 15px;
+    }
+  }
+  
