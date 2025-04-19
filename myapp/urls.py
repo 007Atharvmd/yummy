@@ -23,4 +23,9 @@ urlpatterns = [
     path('',views.home, name="home"),
     path('book/', views.book, name="book"),
     path('contactus/', views.contact, name="contact"),
+    path('login/', views.login_user, name="login"),
+    path('dashboard/', views.dashboard, name="dashboard"),
+    path('delete/<int:id>/', views.delete_record, name="delete_record"),
+    path('edit/<int:id>/',views.edit,name="edit"),
+    path('update/<int:id>/',views.update_record, name="update_record"),
 ]

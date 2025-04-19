@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
 from django.utils.timezone import now, make_aware
 from django.contrib.auth import authenticate, login, logout
@@ -48,3 +49,46 @@ def contact(request):
         #messages.success(request, 'Enquiry Form Submitted Succesfully....')
         return redirect('/?submitted=true#contact')
     return render(request, 'index.html')
+
+def login_user(request):
+    if request.method == "POST":
+        a = request.POST['username']
+        b = request.POST['password']
+        
+        user = authenticate(request, username = a, password = b)
+
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            # display 'invalid login' error message
+            messages.error(request, 'In-correct username or password!..')
+    return render(request, 'login.html')
+
+def dashboard(request):
+    data=booking_table.objects.all()
+    dict1={'information':data}
+    return render(request,'dashboard.html',dict1)
+
+def delete_record(request, id):
+    if request.method == 'POST':
+        data=booking_table.objects.get(pk=id)
+        data.delete()
+    return HttpResponseRedirect('/dashboard/')
+
+def edit(request,id):
+    info=booking_table.objects.filter(pk=id)
+    data={'information':info}
+    return render(request, 'edit.html', data)
+
+def update_record(request,id):
+    info=booking_table.objects.get(pk=id)
+    info.name = request.POST.get('name')
+    info.email = request.POST.get('email')
+    info.phone = request.POST.get('phone')
+    info.date = request.POST.get('date')
+    info.time = request.POST.get('time')
+    info.people = request.POST.get('people')
+    info.message = request.POST.get('message')
+    info.save()
+    return HttpResponseRedirect('/dashboard/')

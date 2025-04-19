@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Login | Yummy</title>
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Inter:wght@300;400;500;700&family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+  <style>
+    #login.section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 0;
+      min-height: 100vh;
+      background-color: #f8f9fa;
+    }
+
+    .login-form-bg {
+      width: 100%;
+      max-width: 500px;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-login {
+      background-color: #ce1212;
+      color: #fff;
+      border-radius: 50px;
+      padding: 12px 32px;
+      font-weight: 600;
+      border: none;
+    }
+
+    .btn-login:hover {
+      background-color: #a60e0e;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .alert {
+      width: 100%;
+      max-width: 500px;
+      margin: 10px auto;
+    }
+  </style>
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto me-xl-0">
+        <h1 class="sitename">Yummy</h1><span>.</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="main">
+    <section id="login" class="section">
+      {% for message in messages %}
+        <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %}" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Login</h2>
+        <p><span>Access Your</span> <span class="description-title">Account</span></p>
+      </div>
+
+      <div class="login-form-bg" data-aos="fade-up" data-aos-delay="200">
+        <form action="{% url 'login' %}" method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <input type="text" class="form-control" name="username" placeholder="Username" required>
+          </div>
+          <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Password" required>
+          </div>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn-login">Login</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const alertBox = document.querySelector('.alert-success');
+      if (alertBox) {
+        setTimeout(function () {
+          window.location.href = "{% url 'home' %}";
+        }, 10000);
+      }
+    });
+  </script>
+  <script>
+    AOS.init();
+  </script>
+  
+</body>
+</html>

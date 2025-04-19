@@ -1,0 +1,194 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Table Booking</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{% static 'assets/css/main.css' %}" rel="stylesheet">
+
+  <style>
+    #book-a-table.section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 0;
+      min-height: 100vh;
+      background-color: #f8f9fa;
+    }
+
+    .reservation-form-bg {
+      width: 100%;
+      max-width: 800px;
+      background: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-book {
+      background-color: #ce1212;
+      color: #fff;
+      border-radius: 50px;
+      padding: 12px 32px;
+      font-weight: 600;
+      border: none;
+    }
+
+    .btn-book:hover {
+      background-color: #a60e0e;
+    }
+
+    .reservation-img {
+      display: none;
+    }
+
+    .section-title {
+      text-align: center;
+    }
+
+    .book-a-table {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Success message styling */
+    .alert-success {
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+      color: #155724;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+
+    /* Error message styling */
+    .alert-error {
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+      color: #721c24;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body class="index-page">
+    <header id="header" class="header d-flex align-items-center sticky-top">
+        <div class="container position-relative d-flex align-items-center justify-content-between">
+    
+          <a href="{% url 'home' %}" class="logo d-flex align-items-center me-auto me-xl-0">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <img src="{% static 'assets/img/logo.png' %}" alt="">
+            <h1 class="sitename">Yummy</h1>
+            <span>.</span>
+          </a>
+    
+          <nav id="navmenu" class="navmenu">
+            <ul>
+              <li><a href="#hero" class="active">Admin Dashboard<br></a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+          </nav>
+    
+          <a class="btn-getstarted" href="{% url 'login' %}">Logout</a>
+    
+        </div>
+      </header>
+    <main>
+        <div class="col-lg-8">
+            {% for x in messages %}
+            <div class="alert alert-success" role="alert">
+              {{x}}
+            </div>
+            {% endfor %}
+
+            {% for x in information %}
+            <form action="{% url 'update_record' x.id %}" method="POST"  data-aos="fade-up" data-aos-delay="200">
+              <div class="row gy-4">
+                {% csrf_token %}
+
+                
+                <div class="col-md-6">
+                    <label for="field_id">Booking ID</label>
+                    <input type="text" name="id" value={{x.id}} class="form-control" placeholder="Your Name" required="">
+                  </div>
+                <div class="col-md-6">
+                    <label for="field_id">Name</label>
+                  <input type="text" name="name" value={{x.name}} class="form-control" placeholder="Your Name" required="">
+                </div>
+
+                <div class="col-md-6 ">
+                    <label for="field_id">Email</label>
+                  <input type="email" class="form-control" name="email" value={{x.email}} placeholder="Your Email" required="">
+                </div>
+
+                <div class="col-md-12">
+                    <label for="field_id">Phone</label>
+                  <input type="text" class="form-control" name="phone" value={{x.phone}} placeholder="Subject" required="">
+                </div>
+
+                <div class="col-md-12">
+                    <label for="field_id">Date</label>
+                    <input type="date" class="form-control" name="date" value={{x.date}} placeholder="Subject" required="">
+                  </div>
+
+                  <div class="col-md-12">
+                    <label for="field_id">Time</label>
+                    <input type="time" class="form-control" name="time" value={{x.time}} placeholder="Subject" required="">
+                  </div>
+
+                  <div class="col-md-12">
+                    <label for="field_id">No of people</label>
+                    <input type="number" class="form-control" name="people" value={{x.people}} placeholder="Subject" required="">
+                  </div>
+
+                <div class="col-md-12">
+                    <label for="field_id">Message</label>
+                  <textarea class="form-control" name="message" value={{x.message}} rows="6" placeholder="Message" required=""></textarea>
+                </div>
+                {% endfor %}
+                <div class="col-md-12 text-center">
+                 
+                
+
+                <div class="col-md-12 text-center">
+                  <input type="submit" class="form-control" value="Update" name="submit" class="btn btn-success">
+                </div>
+
+              </div>
+            </form>
+          </div>
+      </main>
+  
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <script>
+    AOS.init();
+  </script>
+  </body>
+  </html>	
+  
